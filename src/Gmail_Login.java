@@ -11,6 +11,9 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 
 import java.io.File;
+import java.util.concurrent.TimeUnit;
+
+import static java.lang.Thread.*;
 
 
 public class Gmail_Login {
@@ -56,10 +59,13 @@ public class Gmail_Login {
         username.clear();
         username.sendKeys("TestSelenium");
         // enter a valid password in the password textbox
+        WebElement NextButton = driver.findElement(By.id("next"));
+        NextButton.click();
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         WebElement password = driver.findElement(By.id("Passwd"));
         password.clear();
         password.sendKeys("password123");
-        // click on the Sign in button
+      //   click on the Sign in button
         WebElement SignInButton = driver.findElement(By.id("signIn"));
         SignInButton.click();
         // close the web browser
