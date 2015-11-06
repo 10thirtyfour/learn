@@ -15,7 +15,6 @@ import java.io.File;
 
 public class Gmail_Login {
 
-    ЕБАННЫЙ АПДЕЙТ, ХУЙ ПРОПУСТИШЬ!!!
 
     File pathToBinary = new File("C:\\Program Files\\Mozilla Firefox\\Firefox.exe");
     FirefoxBinary ffBinary = new FirefoxBinary(pathToBinary);
