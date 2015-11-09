@@ -6,23 +6,11 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxProfile;
-
-import java.io.File;
-import java.util.concurrent.TimeUnit;
-
-import static java.lang.Thread.*;
-
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class Gmail_Login {
-
-
-    File pathToBinary = new File("C:\\Program Files\\Mozilla Firefox\\Firefox.exe");
-    FirefoxBinary ffBinary = new FirefoxBinary(pathToBinary);
-    FirefoxProfile firefoxProfile = new FirefoxProfile();
-    FirefoxDriver _driver = new FirefoxDriver(ffBinary,firefoxProfile);
 
     public static final String APP_URL = "https://accounts.google.com";
 
@@ -61,8 +49,15 @@ public class Gmail_Login {
         // enter a valid password in the password textbox
         WebElement NextButton = driver.findElement(By.id("next"));
         NextButton.click();
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        WebElement password = driver.findElement(By.id("Passwd"));
+
+        //yours implementation
+//        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+//        WebElement password = driver.findElement(By.id("Passwd"));
+
+        //alternative way
+        WebElement password = (new WebDriverWait(driver, 30))
+                .until(ExpectedConditions.presenceOfElementLocated(By.id("Passfswd")));
+
         password.clear();
         password.sendKeys("password123");
       //   click on the Sign in button
