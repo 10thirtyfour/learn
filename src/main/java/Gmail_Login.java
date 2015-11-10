@@ -36,7 +36,7 @@ public class Gmail_Login {
         // declare and initialize the variable to store the expected title of the webpage.
 
         logger.info("Test has started...");
-        String expectedTitle = " Sign in - Google Accounts ";
+        String expectedTitle = "Sign in - Google Accounts";
         // fetch the title of the web page and save it into a string variable
         String actualTitle = driver.getTitle();
         // compare the expected title of the page with the actual title of the page and print the result
@@ -78,3 +78,4 @@ public class Gmail_Login {
         driver.quit();
     }
 }
+
