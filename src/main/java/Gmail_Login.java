@@ -4,6 +4,7 @@
 
 
 import org.apache.log4j.Logger;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -39,15 +40,23 @@ public class Gmail_Login {
         String expectedTitle = "Sign in - Google Accounts";
         // fetch the title of the web page and save it into a string variable
         String actualTitle = driver.getTitle();
-        // compare the expected title of the page with the actual title of the page and print the result
-        if (expectedTitle.equals(actualTitle))
-        {
-            logger.info("Verification Successful - The correct title is displayed on the web page.");
-        }
-        else
-        {
-            logger.info("Verification Failed - An incorrect title is displayed on the web page.");
-        }
+
+
+
+        // TODO: так было
+//        if (expectedTitle.equals(actualTitle))
+//        {
+//            logger.info("Verification Successful - The correct title is displayed on the web page.");
+//        }
+//        else
+//        {
+//            logger.info("Verification Failed - An incorrect title is displayed on the web page.");
+//        }
+
+        //TODO: так надо
+        Assert.assertEquals("Title is incorrect", expectedTitle, actualTitle);
+
+
 
         // enter a valid username in the email textbox
         WebElement username = driver.findElement(By.id("Email"));
