@@ -109,13 +109,6 @@ public class Gmail_Login {
             logger.info("Error Message is not present");
         }
 
-
-
-
-
-
-
-
         driver.close();
         logger.info("Test script executed successfully.");
         driver.quit();
