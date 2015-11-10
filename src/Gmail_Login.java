@@ -64,6 +64,7 @@ public class Gmail_Login {
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         WebElement password = driver.findElement(By.id("Passwd"));
         password.clear();
+        //TODO: example changes in master
         password.sendKeys("password123");
       //   click on the Sign in button
         WebElement SignInButton = driver.findElement(By.id("signIn"));
