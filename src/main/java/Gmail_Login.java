@@ -23,14 +23,19 @@ public class Gmail_Login {
      */
     public static void main(String[] args) {
         // objects and variables instantiation
+        logger.info("Running driver...");
         WebDriver driver = new FirefoxDriver();
 
+        logger.info("Launch browser...");
         // launch the firefox browser and open the application url
         driver.get(APP_URL);
 
+        logger.info("Maximize browser window...");
         // maximize the browser window
         driver.manage().window().maximize();
         // declare and initialize the variable to store the expected title of the webpage.
+
+        logger.info("Test has started...");
         String expectedTitle = " Sign in - Google Accounts ";
         // fetch the title of the web page and save it into a string variable
         String actualTitle = driver.getTitle();
@@ -58,7 +63,7 @@ public class Gmail_Login {
 
         //alternative way
         WebElement password = (new WebDriverWait(driver, 30))
-                .until(ExpectedConditions.presenceOfElementLocated(By.id("Passfswd")));
+                .until(ExpectedConditions.presenceOfElementLocated(By.id("Passwd")));
 
         password.clear();
 
@@ -70,6 +75,6 @@ public class Gmail_Login {
         driver.close();
         logger.info("Test script executed successfully.");
         // terminate the program
-        System.exit(0);
+        driver.quit();
     }
 }
