@@ -59,6 +59,7 @@ public class Gmail_Login {
                 .until(ExpectedConditions.presenceOfElementLocated(By.id("Passfswd")));
 
         password.clear();
+        //TODO: example changes in master
         password.sendKeys("password123");
       //   click on the Sign in button
         WebElement SignInButton = driver.findElement(By.id("signIn"));
