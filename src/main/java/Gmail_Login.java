@@ -17,6 +17,30 @@ public class Gmail_Login {
 
     public static final String APP_URL = "https://accounts.google.com";
 
+    public static void LocateElementbyXpath (WebDriver driver, String elementName, String elementPath)
+    {
+        logger.info("verifying "+elementName);
+
+        try {
+            driver.findElement(By.xpath(elementPath));
+        } catch (org.openqa.selenium.NoSuchElementException e) {
+            logger.error(elementName+" is not present", e);
+        }
+
+    }
+
+    public static void LocateElementbyId (WebDriver driver, String elementName, String elementId)
+    {
+        logger.info("verifying "+elementName);
+
+        try {
+            driver.findElement(By.id(elementId));
+        } catch (org.openqa.selenium.NoSuchElementException e) {
+            logger.error(elementName+" is not present", e);
+        }
+
+    }
+
     /**
      * 8
      *
@@ -34,50 +58,16 @@ public class Gmail_Login {
         String expectedTitle = "Sign in - Google Accounts";
         String actualTitle = driver.getTitle();
         Assert.assertEquals("Title is incorrect", expectedTitle, actualTitle);
-        logger.info("verifying Logo");
-        try {
-            driver.findElement(By.xpath("//*[contains(@class,'logo logo-w')]"));
-            // "//div[contains(@class,'logo logo-w')]" - лучше указывать имя конкретного элемента, в данном случае div
-        } catch (org.openqa.selenium.NoSuchElementException e) {
-            logger.error("Logo is not present", e);
-        }
 
-        logger.info("verifying Sign in message");
+        LocateElementbyXpath(driver,"Sign in message","//h2");
 
-        try {
-            driver.findElement(By.xpath("//*[contains(text(),'Sign in with your Google Account')]"));
-            // "//h2" - если обратишь внимание на этой странице всего 1 элемент h2, ну и по правилам хорошего html он долженбыть 1 на странцице,
-            // коротко, уникально, понятно, кроме того текст который ты использовал может меняться
-        } catch (org.openqa.selenium.NoSuchElementException e) {
-            logger.error("Sign in message is not present", e);
-        }
+        LocateElementbyXpath(driver,"Logo","//div[contains(@class,'logo logo-w')]");
 
-        logger.info("verifying Canvas");
+        LocateElementbyId(driver,"Canvas","canvas");
 
-        try {
-            driver.findElement(By.id("canvas"));
-        } catch (org.openqa.selenium.NoSuchElementException e) {
-            logger.error("Canvas is not present", e);
-        }
+        LocateElementbyXpath(driver,"Need Help link","//input[@id='next']/following-sibling::a");
 
-        logger.info("verifying Need Help link");
-
-        try {
-            driver.findElement(By.xpath("//*[contains(@class,'need-help')]"));
-            // "//input[@id='next']/following-sibling::a" - здесь я использую привязку к элементу, который имеет id,
-            // что стабилизирует xpath
-        } catch (org.openqa.selenium.NoSuchElementException e) {
-            logger.error("Need Help link is not present", e);
-        }
-
-        logger.info("verifying Create Account link");
-
-        try {
-            driver.findElement(By.xpath("//*[contains(text(),'Create account')]"));
-            // "//span[@id='link-signup']/a" у элемента span в котором находится нужный объект есть id, почему бы нам его не использовать?
-        } catch (org.openqa.selenium.NoSuchElementException e) {
-            logger.error("Create Account link is not present", e);
-        }
+        LocateElementbyXpath(driver,"Create Account link","//span[@id='link-signup']/a");
 
         WebElement username = driver.findElement(By.id("Email"));
         username.clear();
@@ -94,8 +84,7 @@ public class Gmail_Login {
         logger.info("verifying Error Message");
 
         try {
-            WebElement errorMessage = driver.findElement(By.xpath("//*[contains(@id,'errormsg_0_Passwd')]"));
-            // ну тут можно было тупо id использовать, ну либо "//span[@id='errormsg_0_Passwd']"
+            WebElement errorMessage = driver.findElement(By.xpath("//span[@id='errormsg_0_Passwd']"));
             String actualError = errorMessage.getText();
             String expectedError = "The email and password you entered don't match.";
             Assert.assertEquals("Error Message is incorrect", expectedError, actualError);
@@ -103,16 +92,6 @@ public class Gmail_Login {
         } catch (org.openqa.selenium.NoSuchElementException e) {
             logger.error("Error Message is not present, e");
         }
-
-        //Насчет проверки, что инпут пароля стал с красным ободком
-        //1. так как страница перезагрузилась, нужно перечитать элемент пасворд, как этого избежать расскажу позже
-        //2. инпут пасворд не имеет никакого класса, до того как появится ошибка class=""
-        //3. после того как ошибка появилась и инпут стал с красным ободком у инпута появляется класс class="form-error"
-        // это мы и проверяем, что при появлении ошибки у инпута стал не пустой класс, ну или можно проверить конкретно
-        // на имя класса, но думаю это уже будет лишнее.
-        // ну и если хочешь убедится что именно этот класс отвечает за подкрашивание красным, ты можешь пойти в css
-        // файлы и найти там класс с именем form-error и посмотреть какие стили применяются в том классе,
-        // там ты увидишь бордер красного цвета
 
         logger.info("verifying red border of password field");
         password = (new WebDriverWait(driver, 30))
