@@ -10,22 +10,16 @@ import org.openqa.selenium.WebElement;
 public class DriverUtils {
     public static final String NOT_VISIBLE_TEXT = " is not visible";
 
-    public static boolean isElementVisible(WebDriver driver, String locator) {
+    public static boolean isElementVisible(WebElement webElement) {
         try {
-            WebElement element;
-            if (locator.contains("//")) {
-                element = driver.findElement(By.xpath(locator));
-            } else {
-                element = driver.findElement(By.id(locator));
-            }
-            return element.isDisplayed() && !element.getAttribute("class").contains("display: none");
+            return webElement.isDisplayed() && !webElement.getAttribute("class").contains("display: none");
         } catch (NoSuchElementException e) {
             return false;
         }
     }
 
-    public static void assertElementVisible(String elementName, WebDriver driver, String locator) {
-        Assert.assertTrue(elementName + NOT_VISIBLE_TEXT, isElementVisible(driver, locator));
+    public static void assertElementVisible(String elementName, WebElement webElement) {
+        Assert.assertTrue(elementName + NOT_VISIBLE_TEXT, isElementVisible(webElement));
     }
 
 }
