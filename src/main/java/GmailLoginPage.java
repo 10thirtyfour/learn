@@ -49,7 +49,7 @@ public class GmailLoginPage {
     public void inputPassword (String passwd)
     {
         password.clear();
-        username.sendKeys(passwd);
+        password.sendKeys(passwd);
         signInButton.click();
     }
 

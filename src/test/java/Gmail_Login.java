@@ -61,7 +61,7 @@ public class Gmail_Login {
            // WebElement NextButton = driver.findElement(By.id("next"));
           //  NextButton.click();
 
-            DriverUtils.assertElementVisible("Sign in button", driver, "signIn");
+          //  DriverUtils.assertElementVisible("Sign in button", driver, "signIn");
             page.inputPassword("password");
 
           //  DriverUtils.assertElementVisible("Password button", driver, "Passwd");
