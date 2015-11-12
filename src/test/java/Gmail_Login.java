@@ -10,6 +10,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.PageFactory;
 
 import java.util.concurrent.TimeUnit;
 
@@ -23,40 +24,54 @@ public class Gmail_Login {
         // objects and variables instantiation
         logger.info("Running driver...");
         WebDriver driver = new FirefoxDriver();
+      //  GmailLoginPage gmailLoginPage = new GmailLoginPage(driver);
+        GmailLoginPage page = PageFactory.initElements(driver,GmailLoginPage.class);
         logger.info("Launch browser...");
-        driver.get(APP_URL);
+        page.open (APP_URL);
         logger.info("Maximize browser window...");
         driver.manage().window().maximize();
         logger.info("Set implicity wait...");
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         logger.info("Test has started...");
         try {
-            String expectedTitle = "Sign in - Google Accounts";
-            String actualTitle = driver.getTitle();
-            Assert.assertEquals("Title is incorrect", expectedTitle, actualTitle);
+
+            page.titleCheck();
+          //  String expectedTitle = "Sign in - Google Accounts";
+          //  String actualTitle = driver.getTitle();
+           // Assert.assertEquals("Title is incorrect", expectedTitle, actualTitle);
+
+
 
             DriverUtils.assertElementVisible("Logo", driver, "//div[contains(@class,'logo logo-w')]");
             DriverUtils.assertElementVisible("Canvas", driver, "canvas");
             DriverUtils.assertElementVisible("Need Help link", driver, "//input[@id='next']/following-sibling::a");
             DriverUtils.assertElementVisible("Create Account link", driver, "//span[@id='link-signup']/a");
+            DriverUtils.assertElementVisible("Next button", driver, "next");
+
 
             DriverUtils.assertElementVisible("Email input", driver, "Email");
-            WebElement username = driver.findElement(By.id("Email"));
-            username.clear();
-            username.sendKeys("TestSelenium");
+            page.inputUsername("SeleniumTest");
 
-            DriverUtils.assertElementVisible("Next button", driver, "next");
-            WebElement NextButton = driver.findElement(By.id("next"));
-            NextButton.click();
 
-            DriverUtils.assertElementVisible("Password button", driver, "Passwd");
-            WebElement password = driver.findElement(By.id("Passwd"));
-            password.clear();
-            password.sendKeys("password123");
+          //  WebElement username = driver.findElement(By.id("Email"));
+           // username.clear();
+           // username.sendKeys("TestSelenium");
+
+
+           // WebElement NextButton = driver.findElement(By.id("next"));
+          //  NextButton.click();
 
             DriverUtils.assertElementVisible("Sign in button", driver, "signIn");
-            WebElement SignInButton = driver.findElement(By.id("signIn"));
-            SignInButton.click();
+            page.inputPassword("password");
+
+          //  DriverUtils.assertElementVisible("Password button", driver, "Passwd");
+          //  WebElement password = driver.findElement(By.id("Passwd"));
+          //  password.clear();
+          //  password.sendKeys("password123");
+
+
+         //   WebElement SignInButton = driver.findElement(By.id("signIn"));
+          //  SignInButton.click();
 
             logger.info("verifying Error Message");
 
@@ -68,13 +83,13 @@ public class Gmail_Login {
 
             logger.info("verifying red border of password field");
 
-            DriverUtils.assertElementVisible("Password button", driver, "Passwd");
-            password = driver.findElement(By.id("Passwd"));
-            Assert.assertFalse(password.getAttribute("class").isEmpty());
+          //  DriverUtils.assertElementVisible("Password button", driver, "Passwd");
+          //  password = driver.findElement(By.id("Passwd"));
+          //  Assert.assertFalse(password.getAttribute("class").isEmpty());
 
         } finally {
             logger.info("Shutting down driver...");
-            driver.close();
+            page.close();
             driver.quit();
         }
         logger.info("Test script executed successfully.");
