@@ -1,6 +1,4 @@
 import org.junit.Assert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -8,83 +6,53 @@ import org.openqa.selenium.support.FindBy;
 /**
  * Created by User on 12.11.2015.
  */
-public class GmailLoginPage {
-    @FindBy (id="Email")
-    WebElement usernameInput;
+public class GmailLoginPage extends BasicPage {
+    @FindBy(id = "Email")
+    private WebElement usernameInput;
 
-    @FindBy (id="next")
-    WebElement nextButton;
+    @FindBy(id = "next")
+    private WebElement nextButton;
 
-    @FindBy (id="Passwd")
-    WebElement passwordInput;
+    @FindBy(id = "Passwd")
+    private WebElement passwordInput;
 
-    @FindBy (id="signIn")
-    WebElement signInButton;
+    @FindBy(id = "signIn")
+    private WebElement signInButton;
 
-    protected WebDriver driver;
-    public static final String EXPEXTED_TITLE = "Sign in - Google Accounts";
+    @FindBy(xpath = "//div[contains(@class,'logo logo-w')]")
+    private WebElement logo;
 
     public GmailLoginPage(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
     }
 
-    public GmailLoginPage() {
-
+    public void inputUsername(String email) {
+        usernameInput().type(email);
+        nextButton().click();
     }
 
-    public void open(String url) {
-        driver.get(url);
-    }
-    public void close() {
-        driver.quit();
-    }
-    public String getTitle() {
-        return driver.getTitle();
+    public void inputPassword(String passwd) {
+        passwordInput().type(passwd);
+        signInButton().click();
     }
 
-    public void titleCheck ()
-    {
-        Assert.assertEquals("Title is incorrect", EXPEXTED_TITLE, getTitle());
+    public WebElementFacade signInButton() {
+        return element(signInButton);
     }
 
-    public void inputUsername (String email)
-    {
-        usernameInput.clear();
-        usernameInput.sendKeys(email);
-        nextButton.click();
+    public WebElementFacade usernameInput() {
+        return element(usernameInput);
     }
 
-    public void inputPassword (String passwd)
-    {
-        passwordInput.clear();
-        passwordInput.sendKeys(passwd);
-        signInButton.click();
+    public WebElementFacade nextButton() {
+        return element(nextButton);
     }
 
-    public WebElement signInButton() {
-        return signInButton;
+    public WebElementFacade passwordInput() {
+        return element(passwordInput);
     }
 
-    public WebElement usernameInput() {
-        return usernameInput;
+    public WebElementFacade logo() {
+        return element(logo);
     }
-
-    public WebElement nextButton() {
-        return nextButton;
-    }
-
-    public WebElement password() {
-        return passwordInput;
-    }
-
-
-
-
-
-
-
-
-
-
-
 }
