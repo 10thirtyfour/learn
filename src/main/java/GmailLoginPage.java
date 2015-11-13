@@ -19,8 +19,20 @@ public class GmailLoginPage extends BasicPage {
     @FindBy(id = "signIn")
     private WebElement signInButton;
 
+    @FindBy(id = "canvas")
+    private WebElement canvas;
+
+    @FindBy(xpath = "//input[@id='next']/following-sibling::a")
+    private WebElement needHelpLink;
+
+    @FindBy(xpath = "//span[@id='link-signup']/a")
+    private WebElement createAccountLink;
+
     @FindBy(xpath = "//div[contains(@class,'logo logo-w')]")
     private WebElement logo;
+
+    @FindBy(xpath = "//span[@id='errormsg_0_Passwd']")
+    private WebElement errorMessage;
 
     public GmailLoginPage(WebDriver driver) {
         super(driver);
@@ -55,4 +67,20 @@ public class GmailLoginPage extends BasicPage {
     public WebElementFacade logo() {
         return element(logo);
     }
+
+    public WebElementFacade canvas() {
+        return element(canvas);
+    }
+    public WebElementFacade needHelpLink() {
+        return element(needHelpLink);
+    }
+    public WebElementFacade createAccountLink() {
+        return element(createAccountLink);
+    }
+
+    public WebElementFacade errorMessage() {
+        return element(errorMessage);
+    }
+
+
 }

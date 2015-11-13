@@ -23,6 +23,8 @@ public class Gmail_Login {
 
     public static final String IS_NOT_VISIBLE = " is not visible";
 
+    public static final String EXPECTED_ERROR = "The email and password you entered don't match.";
+
     @Test
     public void testGmailLogin() {
         // objects and variables instantiation
@@ -42,12 +44,10 @@ public class Gmail_Login {
             Assert.assertEquals("Title is incorrect", EXPEXTED_TITLE, gmailLoginPage.getPageTitle());
 
             Assert.assertTrue("Logo" + IS_NOT_VISIBLE, gmailLoginPage.logo().isVisible());
-            //TODO: сделать также как выше
-//            DriverUtils.assertElementVisible("Canvas", driver, "canvas");
-//            DriverUtils.assertElementVisible("Need Help link", driver, "//input[@id='next']/following-sibling::a");
-//            DriverUtils.assertElementVisible("Create Account link", driver, "//span[@id='link-signup']/a");
-//            DriverUtils.assertElementVisible("Next button", gmailLoginPage.nextButton());
-
+            Assert.assertTrue("Canvas" + IS_NOT_VISIBLE, gmailLoginPage.canvas().isVisible());
+            Assert.assertTrue("Need Help link" + IS_NOT_VISIBLE, gmailLoginPage.needHelpLink().isVisible());
+            Assert.assertTrue("Create Account link" + IS_NOT_VISIBLE, gmailLoginPage.createAccountLink().isVisible());
+            Assert.assertTrue("Next button" + IS_NOT_VISIBLE, gmailLoginPage.nextButton().isVisible());
 
             Assert.assertTrue("User name" + IS_NOT_VISIBLE, gmailLoginPage.usernameInput().isVisible());
             gmailLoginPage.inputUsername("SeleniumTest");
@@ -57,12 +57,8 @@ public class Gmail_Login {
 
             logger.info("verifying Error Message");
 
-            //TODO: сделать то что ниже закомментировано использую новую методику, ну ты понял, добавь эррор элемент на страницу и так далее
-//            DriverUtils.assertElementVisible("Error message", driver, "//span[@id='errormsg_0_Passwd']");
-//            WebElement errorMessage = driver.findElement(By.xpath("//span[@id='errormsg_0_Passwd']"));
-//            String actualError = errorMessage.getText();
-//            String expectedError = "The email and password you entered don't match.";
-//            Assert.assertEquals("Error Message is incorrect", expectedError, actualError);
+            Assert.assertTrue("Error message" + IS_NOT_VISIBLE, gmailLoginPage.errorMessage().isVisible());
+            Assert.assertEquals("Error Message is incorrect", EXPECTED_ERROR, gmailLoginPage.errorMessage().getText());
 
             logger.info("verifying red border of password field");
 
