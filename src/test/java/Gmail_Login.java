@@ -30,7 +30,6 @@ public class Gmail_Login {
         // objects and variables instantiation
         logger.info("Running driver...");
         WebDriver driver = new FirefoxDriver();
-      //  GmailLoginPage gmailLoginPage = new GmailLoginPage(driver);
         GmailLoginPage gmailLoginPage = PageFactory.initElements(driver,GmailLoginPage.class);
         logger.info("Launch browser...");
         gmailLoginPage.open(APP_URL);
@@ -50,7 +49,7 @@ public class Gmail_Login {
             Assert.assertTrue("Next button" + IS_NOT_VISIBLE, gmailLoginPage.nextButton().isVisible());
 
             Assert.assertTrue("User name" + IS_NOT_VISIBLE, gmailLoginPage.usernameInput().isVisible());
-            gmailLoginPage.inputUsername("SeleniumTest");
+            gmailLoginPage.inputUsername("needle1034@gmail.com");
 
             Assert.assertTrue("Password" + IS_NOT_VISIBLE, gmailLoginPage.passwordInput().isVisible());
             gmailLoginPage.inputPassword("password");
