@@ -9,7 +9,7 @@ public class BasicPage {
     protected WebDriver driver;
 
     public WebElementFacade element(WebElement webElement) {
-        return WebElementFacade.wrapWebElement(webElement);
+        return WebElementFacade.wrapWebElement(webElement, driver);
     }
 
     public BasicPage(WebDriver driver) {

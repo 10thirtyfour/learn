@@ -6,6 +6,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.concurrent.TimeUnit;
 
@@ -21,15 +23,6 @@ public class Character_Create {
     private static final String NAME = "TestName";
     private static final String AGE = "50";
     private static final String EXP = "200";
-
-    String charLinkXpath = "//*[contains(text(),'" + NAME + "')]";
-
-    public String findCharacterId(WebDriver driver, String name) {
-        WebElement characterLink = driver.findElement(By.xpath(charLinkXpath));
-        String linkText = characterLink.getAttribute("href");
-        String[] parts = linkText.split("=");
-        return parts[1];
-    }
 
     @Test
     public void testGmailLogin() {
@@ -52,13 +45,11 @@ public class Character_Create {
             characterCreationPage.inputCharacterExp(EXP);
             characterCreationPage.CharacterSubmitButton().click();
 
-            String deleteButtonLinkXpath = "//*[@name='id' and @value='" +
-                    findCharacterId(driver, NAME) +
-                    "']/following-sibling::a[@class='deletePersonage']";
-            driver.navigate().refresh();
-            Assert.assertEquals("Age doesn`t match", AGE, driver.findElement(By.xpath(charLinkXpath + "/parent::*/following-sibling::td[1]")).getText());
-            Assert.assertEquals("Exp doesn`t match", EXP, driver.findElement(By.xpath(charLinkXpath + "/parent::*/following-sibling::td[3]")).getText());
-            driver.findElement(By.xpath(deleteButtonLinkXpath)).click();
+            Assert.assertEquals("Age doesn`t match", AGE, characterCreationPage.ageLabel().getText());
+            Assert.assertEquals("Exp doesn`t match", EXP, characterCreationPage.expLabel().getText());
+            characterCreationPage.successCreationLabel().waitUntilNotVisible();
+            characterCreationPage.deleteCharacterLink().click();
+            characterCreationPage.characterLink().waitUntilNotVisible();
 
         } finally {
             logger.info("Shutting down driver...");
