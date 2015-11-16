@@ -1,0 +1,62 @@
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+
+
+/**
+ * Created by User on 13.11.2015.
+ */
+public class CharacterCreationPage extends BasicPage {
+
+    public CharacterCreationPage(WebDriver driver) {
+        super(driver);
+    }
+
+    @FindBy (xpath = "//div[@id='addPersonageButton']/a/button")
+    private WebElement characterCreateButton;
+
+    @FindBy (id = "name")
+    private WebElement nameInput;
+
+    @FindBy (id = "age")
+    private WebElement ageInput;
+
+    @FindBy (id = "experience")
+    private WebElement expInput;
+
+    @FindBy (id = "addPersonageSubmitButton")
+    private WebElement CharacterSubmitButton;
+
+    public void inputCharacterName(String name)
+    {
+        nameInput().type(name);
+    }
+
+    public void inputCharacterAge(String age)
+    {
+        ageInput().type(age);
+    }
+
+    public void inputCharacterExp(String age)
+    {
+        expInput().type(age);
+    }
+
+    public WebElementFacade characterCreateButton() {
+        return element(characterCreateButton);
+    }
+    public WebElementFacade CharacterSubmitButton() {
+        return element(CharacterSubmitButton);
+    }
+    public WebElementFacade nameInput() {
+        return element(nameInput);
+    }
+    public WebElementFacade ageInput() {
+        return element(ageInput);
+    }
+    public WebElementFacade expInput() {
+        return element(expInput);
+    }
+}
+
