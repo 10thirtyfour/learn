@@ -1,23 +1,19 @@
 import org.apache.log4j.Logger;
 import org.junit.Assert;
 import org.junit.Test;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.concurrent.TimeUnit;
 
 /**
  * Created by User on 16.11.2015.
  */
-public class Character_Create {
+public class CharacterCreate {
 
 
-    protected static final Logger logger = Logger.getLogger(Character_Create.class);
+    protected static final Logger logger = Logger.getLogger(CharacterCreate.class);
 
     public static final String APP_URL = "http://character-gen.herokuapp.com/view/personage_manager.html";
     private static final String NAME = "TestName";
