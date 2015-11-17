@@ -38,19 +38,10 @@ public class CharacterCreate {
 
 
         try {
-//            characterLinkPresent = characterCreationPage.characterLink().isCurrentlyVisible();
-//            if (characterLinkPresent) {
-
-                while (characterCreationPage.characterLink().isCurrentlyVisible()) {
-//                    characterLinkPresent = characterCreationPage.characterLink().isCurrentlyVisible();
-//                    logger.info(characterLinkPresent);
-//                    if (!characterLinkPresent) {
-//                        break;
-//                    }
-                    characterCreationPage.deleteCharacterLink().click();
-                    DriverUtils.waitTimeOut(2000);
-                }
-//            }
+            while (characterCreationPage.characterLink().isCurrentlyVisible()) {
+                characterCreationPage.deleteCharacterLink().click();
+                DriverUtils.waitTimeOut(2000);
+            }
 
             Assert.assertFalse(characterCreationPage.characterLink().isCurrentlyVisible());
             characterCreationPage.characterCreateButton().click();
