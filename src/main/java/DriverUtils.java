@@ -9,5 +9,8 @@ import org.openqa.selenium.WebElement;
  */
 public class DriverUtils {
 
+    public static void waitTimeOut(long timeOut) throws InterruptedException {
+        Thread.sleep(timeOut);
+    }
 
 }

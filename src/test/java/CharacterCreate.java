@@ -8,8 +8,6 @@ import org.openqa.selenium.support.PageFactory;
 import java.util.concurrent.TimeUnit;
 
 
-
-
 /**
  * Created by User on 16.11.2015.
  */
@@ -40,19 +38,19 @@ public class CharacterCreate {
 
 
         try {
-            characterLinkPresent = characterCreationPage.characterLink().isCurrentlyVisible();
-           if (characterLinkPresent) {
+//            characterLinkPresent = characterCreationPage.characterLink().isCurrentlyVisible();
+//            if (characterLinkPresent) {
 
-               while (characterLinkPresent) {
-                   characterLinkPresent = characterCreationPage.characterLink().isCurrentlyVisible();
-                   System.out.println(characterLinkPresent);
-                   if (!characterLinkPresent) {
-                       break;
-                   }
-                   characterCreationPage.deleteCharacterLink().click();
-                   Thread.sleep(1000);
-               }
-               }
+                while (characterCreationPage.characterLink().isCurrentlyVisible()) {
+//                    characterLinkPresent = characterCreationPage.characterLink().isCurrentlyVisible();
+//                    logger.info(characterLinkPresent);
+//                    if (!characterLinkPresent) {
+//                        break;
+//                    }
+                    characterCreationPage.deleteCharacterLink().click();
+                    DriverUtils.waitTimeOut(2000);
+                }
+//            }
 
             Assert.assertFalse(characterCreationPage.characterLink().isCurrentlyVisible());
             characterCreationPage.characterCreateButton().click();
