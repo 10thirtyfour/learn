@@ -29,7 +29,7 @@ public class CharacterCreationPage extends BasicPage {
     private WebElement expInput;
 
     @FindBy(id = "addPersonageSubmitButton")
-    private WebElement CharacterSubmitButton;
+    private WebElement characterSubmitButton;
 
     @FindBy(xpath = "//a[contains(text(),'" + Constants.CHARACTER_NAME + "')]")
     private WebElement characterLink;
@@ -59,8 +59,8 @@ public class CharacterCreationPage extends BasicPage {
         return element(characterCreateButton);
     }
 
-    public WebElementFacade CharacterSubmitButton() {
-        return element(CharacterSubmitButton);
+    public WebElementFacade characterSubmitButton() {
+        return element(characterSubmitButton);
     }
 
     public WebElementFacade nameInput() {

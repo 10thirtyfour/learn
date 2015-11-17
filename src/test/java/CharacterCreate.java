@@ -7,6 +7,9 @@ import org.openqa.selenium.support.PageFactory;
 
 import java.util.concurrent.TimeUnit;
 
+
+
+
 /**
  * Created by User on 16.11.2015.
  */
@@ -19,9 +22,10 @@ public class CharacterCreate {
     private static final String NAME = "TestName";
     private static final String AGE = "50";
     private static final String EXP = "200";
+    boolean characterLinkPresent;
 
     @Test
-    public void testGmailLogin() {
+    public void testGmailLogin() throws InterruptedException {
         // objects and variables instantiation
         logger.info("Running driver...");
         WebDriver driver = new FirefoxDriver();
@@ -34,18 +38,36 @@ public class CharacterCreate {
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         logger.info("Test has started...");
 
+
         try {
+            characterLinkPresent = characterCreationPage.characterLink().isCurrentlyVisible();
+           if (characterLinkPresent) {
+
+               while (characterLinkPresent) {
+                   characterLinkPresent = characterCreationPage.characterLink().isCurrentlyVisible();
+                   System.out.println(characterLinkPresent);
+                   if (characterLinkPresent == false) {
+                       break;
+                   }
+                   characterCreationPage.deleteCharacterLink().click();
+                   Thread.sleep(1000);
+               }
+               }
+
+            Assert.assertFalse(characterCreationPage.characterLink().isCurrentlyVisible());
             characterCreationPage.characterCreateButton().click();
             characterCreationPage.inputCharacterName(NAME);
             characterCreationPage.inputCharacterAge(AGE);
             characterCreationPage.inputCharacterExp(EXP);
-            characterCreationPage.CharacterSubmitButton().click();
+            characterCreationPage.characterSubmitButton().click();
+            Assert.assertTrue(characterCreationPage.characterLink().isVisible());
 
             Assert.assertEquals("Age doesn`t match", AGE, characterCreationPage.ageLabel().getText());
             Assert.assertEquals("Exp doesn`t match", EXP, characterCreationPage.expLabel().getText());
             characterCreationPage.successCreationLabel().waitUntilNotVisible();
             characterCreationPage.deleteCharacterLink().click();
             characterCreationPage.characterLink().waitUntilNotVisible();
+            Assert.assertFalse(characterCreationPage.characterLink().isCurrentlyVisible());
 
         } finally {
             logger.info("Shutting down driver...");
