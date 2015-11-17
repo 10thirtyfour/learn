@@ -46,7 +46,7 @@ public class CharacterCreate {
                while (characterLinkPresent) {
                    characterLinkPresent = characterCreationPage.characterLink().isCurrentlyVisible();
                    System.out.println(characterLinkPresent);
-                   if (characterLinkPresent == false) {
+                   if (!characterLinkPresent) {
                        break;
                    }
                    characterCreationPage.deleteCharacterLink().click();
