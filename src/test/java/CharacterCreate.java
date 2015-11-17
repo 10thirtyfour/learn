@@ -20,7 +20,6 @@ public class CharacterCreate {
     private static final String NAME = "TestName";
     private static final String AGE = "50";
     private static final String EXP = "200";
-    boolean characterLinkPresent;
 
     @Test
     public void testGmailLogin() throws InterruptedException {
