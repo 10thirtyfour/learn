@@ -8,6 +8,7 @@ import org.openqa.selenium.support.FindBy;
  * Created by User on 13.11.2015.
  */
 public class CharacterCreationPage extends BasicPage {
+    public static final String PAGE_URL = DOMAIN + "/view/personage_manager.html";
 
     public CharacterCreationPage(WebDriver driver) {
         super(driver);
@@ -93,6 +94,10 @@ public class CharacterCreationPage extends BasicPage {
 
     public WebElementFacade successCreationLabel() {
         return element(successCreationLabel);
+    }
+
+    public void open() {
+        driver.navigate().to(PAGE_URL);
     }
 }
 

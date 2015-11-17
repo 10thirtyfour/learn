@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
  */
 public class BasicPage {
     protected WebDriver driver;
+    protected static final String DOMAIN = "http://character-gen.herokuapp.com";
 
     public WebElementFacade element(WebElement webElement) {
         return WebElementFacade.wrapWebElement(webElement, driver);
