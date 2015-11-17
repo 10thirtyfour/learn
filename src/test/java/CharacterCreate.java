@@ -33,14 +33,17 @@ public class CharacterCreate extends BaseTest {
     @Test
     public void testGmailLogin() throws InterruptedException {
         Assert.assertFalse(characterCreationPage.characterLink().isCurrentlyVisible());
+        logger.info("Creating character...");
         characterCreationPage.characterCreateButton().click();
         characterCreationPage.inputCharacterName(NAME);
         characterCreationPage.inputCharacterAge(AGE);
         characterCreationPage.inputCharacterExp(EXP);
         characterCreationPage.characterSubmitButton().click();
+        logger.info("Verifying Character creation");
         Assert.assertTrue(characterCreationPage.characterLink().isVisible());
-
+        logger.info("Verifying Character Age");
         Assert.assertEquals("Age doesn`t match", AGE, characterCreationPage.ageLabel().getText());
+        logger.info("Verifying Character Exp.");
         Assert.assertEquals("Exp doesn`t match", EXP, characterCreationPage.expLabel().getText());
         characterCreationPage.successCreationLabel().waitUntilNotVisible();
         logger.info("Test script executed successfully.");
