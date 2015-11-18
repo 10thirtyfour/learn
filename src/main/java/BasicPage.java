@@ -13,6 +13,9 @@ public class BasicPage {
     @FindBy(xpath = "//a[@href='/view/race_manager.html']")
     private WebElement racePageLink;
 
+    @FindBy(xpath = "//a[@href='/view/personage_manager.html']")
+    private WebElement characerCreationPageLink;
+
     @FindBy(xpath = "//h4")
     private WebElement successCreationLabel;
 
@@ -34,6 +37,10 @@ public class BasicPage {
 
     public WebElementFacade racePageLink() {
         return element(racePageLink);
+    }
+
+    public WebElementFacade characerCreationPageLink() {
+        return element(characerCreationPageLink);
     }
 
     public WebElementFacade successCreationLabel() {

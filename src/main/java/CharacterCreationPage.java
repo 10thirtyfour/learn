@@ -29,6 +29,9 @@ public class CharacterCreationPage extends BasicPage {
     @FindBy(id = "experience")
     private WebElement expInput;
 
+    @FindBy(xpath = "//select[@id='race']/option[contains(text(),'" + Constants.RACE_NAME + "')]")
+    private WebElement characterRace;
+
     @FindBy(id = "addPersonageSubmitButton")
     private WebElement characterSubmitButton;
 
@@ -90,6 +93,10 @@ public class CharacterCreationPage extends BasicPage {
 
     public WebElementFacade expLabel() {
         return element(expLabel);
+    }
+
+    public WebElementFacade characterRace(){
+        return element(characterRace);
     }
 
     public WebElementFacade successCreationLabel() {

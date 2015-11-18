@@ -22,6 +22,9 @@ public class RacePage extends BasicPage {
     @FindBy(xpath = "//select[@id='attribute']/option[contains(text(),'" + Constants.ATTRIBUTE_NAME1 + "')]")
     private WebElement raceAttribute;
 
+    @FindBy(xpath = "//td[contains(text(),'" + Constants.ATTRIBUTE_NAME1 + "')]")
+    private WebElement attribute1;
+
     public WebElementFacade linkAttributeToRaceButton() {
         return element(linkAttributeToRaceButton);
     }
@@ -36,6 +39,10 @@ public class RacePage extends BasicPage {
 
     public WebElementFacade baseCostInput () {
         return element(baseCostInput);
+    }
+
+    public WebElementFacade attribute1 () {
+        return element(attribute1);
     }
 
     public void inputAttributeBaseCost(String cost) {
