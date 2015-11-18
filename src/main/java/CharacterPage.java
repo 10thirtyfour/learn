@@ -15,14 +15,23 @@ public class CharacterPage extends BasicPage {
     private WebElement characterAttribute1;
 
     @FindBy(xpath = "//td[contains(text(),'" + Constants.ATTRIBUTE_NAME1 + "')]/following-sibling::td/a[@class='plusAttribute']")
-    private WebElement increaseAttrValueButton;
+    private WebElement increaseAttrValueButton1;
+
+    @FindBy(xpath = "//td[contains(text(),'" + Constants.ATTRIBUTE_NAME1 + "')]/following-sibling::td[@name='currentValue']")
+    private WebElement attribute1CurrentValue;
 
 
     public WebElementFacade characterAttribute1() {
         return element(characterAttribute1);
     }
 
-    public WebElementFacade increaseAttrValueButton() {
-        return element(increaseAttrValueButton);
+    public WebElementFacade increaseAttrValueButton1() {
+        return element(increaseAttrValueButton1);
+    }
+
+    public WebElementFacade attribute1CurrentValue() {
+        return element(attribute1CurrentValue);
     }
 }
+
+//td[contains(text(),'TestAttribute1')]/following-sibling::td/a[@name='currentValue']

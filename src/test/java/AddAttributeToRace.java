@@ -8,6 +8,7 @@ import org.openqa.selenium.support.PageFactory;
  */
 public class AddAttributeToRace extends BaseTest {
     protected static final Logger logger = Logger.getLogger(AddAttributeToRace.class);
+    public static Integer expCost = 0;
 
 
     AttributeCreationPage attributeCreationPage = PageFactory.initElements(driver, AttributeCreationPage.class);
@@ -15,6 +16,13 @@ public class AddAttributeToRace extends BaseTest {
     RacePage racePage = PageFactory.initElements(driver,RacePage.class);
     CharacterCreationPage characterCreationPage = PageFactory.initElements(driver, CharacterCreationPage.class);
     CharacterPage characterPage = PageFactory.initElements(driver,CharacterPage.class);
+
+    public Integer attributeIncrease (WebElementFacade button, String cost) {
+        button.click();
+       Integer attribute_cost = Integer.parseInt(cost);
+               expCost = expCost+attribute_cost;
+        return expCost;
+    }
 
     @Override
     public void setUp() throws InterruptedException {
@@ -66,7 +74,10 @@ public class AddAttributeToRace extends BaseTest {
         characterCreationPage.characterLink().click();
         logger.info("Verifying Attribute present on Character page");
         Assert.assertTrue(characterPage.characterAttribute1().isVisible());
-        characterPage.increaseAttrValueButton().click();
+        logger.info("Current Exp cost"+attributeIncrease (characterPage.increaseAttrValueButton1(),Constants.ATTRIBUTE_COST1));
+
+
+
 
 
 

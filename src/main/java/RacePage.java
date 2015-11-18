@@ -25,6 +25,9 @@ public class RacePage extends BasicPage {
     @FindBy(xpath = "//td[contains(text(),'" + Constants.ATTRIBUTE_NAME1 + "')]")
     private WebElement attribute1;
 
+    @FindBy(xpath = "//td[contains(text(),'" + Constants.ATTRIBUTE_NAME1 + "')]/following-sibling::td[1]")
+    private WebElement attribute1BaseCostDisplay;
+
     public WebElementFacade linkAttributeToRaceButton() {
         return element(linkAttributeToRaceButton);
     }
