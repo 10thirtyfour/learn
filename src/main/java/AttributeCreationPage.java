@@ -1,3 +1,4 @@
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -22,6 +23,10 @@ public class AttributeCreationPage extends BasicPage {
 
     @FindBy(xpath = "//td[contains(text(),'" + Constants.ATTRIBUTE_NAME1 + "')]")
     private WebElement attribute1;
+
+    public WebElementFacade getAttributeByName(String attributeName) {
+        return element(driver.findElement(By.xpath("//td[contains(text(),'" + attributeName + "')]")));
+    }
 
     public WebElementFacade attribute1() {
         return element(attribute1);

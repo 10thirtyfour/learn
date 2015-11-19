@@ -1,3 +1,4 @@
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -19,6 +20,15 @@ public class CharacterPage extends BasicPage {
 
     @FindBy(xpath = "//td[contains(text(),'" + Constants.ATTRIBUTE_NAME1 + "')]/following-sibling::td[@name='currentValue']")
     private WebElement attribute1CurrentValue;
+
+    public WebElementFacade getCharacterAttributeByName(String attributeName) {
+        return element(driver.findElement(By.xpath("//td[contains(text(),'" + attributeName + "')]")));
+    }
+
+    public WebElementFacade getIncreaseAttributeValueButtonByName(String attributeName) {
+        return element(driver.findElement(By.xpath("//td[contains(text(),'"
+                + attributeName + "')]/following-sibling::td/a[@class='plusAttribute']")));
+    }
 
 
     public WebElementFacade characterAttribute1() {

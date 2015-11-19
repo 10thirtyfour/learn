@@ -1,3 +1,4 @@
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -27,6 +28,14 @@ public class RacePage extends BasicPage {
 
     @FindBy(xpath = "//td[contains(text(),'" + Constants.ATTRIBUTE_NAME1 + "')]/following-sibling::td[1]")
     private WebElement attribute1BaseCostDisplay;
+
+    public WebElementFacade selectAttributeByName(String attributeName) {
+        return element(driver.findElement(By.xpath("//select[@id='attribute']/option[contains(text(),'" + attributeName + "')]")));
+    }
+
+    public WebElementFacade getRaceAttributeByName(String attributeName) {
+        return element(driver.findElement(By.xpath("//td[contains(text(),'" + attributeName + "')]")));
+    }
 
     public WebElementFacade linkAttributeToRaceButton() {
         return element(linkAttributeToRaceButton);
