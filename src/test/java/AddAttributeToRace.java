@@ -11,8 +11,7 @@ import java.util.Map;
  */
 public class AddAttributeToRace extends BaseTest {
     protected static final Logger logger = Logger.getLogger(AddAttributeToRace.class);
-    public static Integer expCost = 0;
-    public static Integer expRemaining = 0;
+
     AttributeCreationPage attributeCreationPage = PageFactory.initElements(driver, AttributeCreationPage.class);
     RaceCreationPage raceCreationPage = PageFactory.initElements(driver, RaceCreationPage.class);
     RacePage racePage = PageFactory.initElements(driver, RacePage.class);
@@ -35,7 +34,7 @@ public class AddAttributeToRace extends BaseTest {
         attributeCreationPage.successCreationLabel().waitUntilNotVisible();
     }
 
-    public void linkAttributeToRace(String name,String cost) {
+    public void linkAttributeToRace(String name, String cost) {
         racePage.linkAttributeToRaceButton().click();
         racePage.selectAttributeByName(name).click();
         racePage.inputAttributeBaseCost(cost);
@@ -43,9 +42,10 @@ public class AddAttributeToRace extends BaseTest {
         racePage.successCreationLabel().waitUntilNotVisible();
     }
 
-    public Integer attributeIncrease(String name,String cost) {
+    public Integer attributeIncrease(String name, String cost) {
         characterPage.getIncreaseAttributeValueButtonByName(name).click();
         Integer attribute_cost = Integer.parseInt(cost);
+        int expCost = 0;
         expCost = expCost + attribute_cost;
         return expCost;
     }
@@ -62,17 +62,18 @@ public class AddAttributeToRace extends BaseTest {
     public void testGmailLogin() throws InterruptedException {
         setAttributeList();
         logger.info("Creating attributes...");
-        for (int i = 0; i < 5; i++) {
-            inputAttribute(Constants.attributeList.get(i).name);
+
+        for (Attribute attribute : Constants.attributeList) {
+            inputAttribute(attribute.name);
         }
-        System.out.println(Constants.attributeList.get(4).name);
 
         logger.info("Verifying Attribute creation");
-        for (int i = 0; i < 5; i++) {
-            Assert.assertTrue(attributeCreationPage.getAttributeByName(Constants.attributeList.get(i).name).isVisible());
+        for (Attribute attribute : Constants.attributeList) {
+            Assert.assertTrue(attributeCreationPage.getAttributeByName(attribute.name).isVisible());
         }
+
         attributeCreationPage.racePageLink().click();
-       logger.info("Creating race...");
+        logger.info("Creating race...");
         raceCreationPage.raceCreateButton().click();
         raceCreationPage.inputRaceName(Constants.RACE_NAME);
         raceCreationPage.raceSubmitButton().click();
@@ -82,15 +83,16 @@ public class AddAttributeToRace extends BaseTest {
         logger.info("Opening Race page...");
         raceCreationPage.raceLink().click();
         logger.info("Linking Attributes to Race...");
-        for (int i = 0; i < 5; i++)
-        {
-            linkAttributeToRace(Constants.attributeList.get(i).name,Constants.attributeList.get(i).baseCost );
+
+        for (Attribute attribute : Constants.attributeList) {
+            linkAttributeToRace(attribute.name, attribute.baseCost);
         }
 
         logger.info("Verifying Attribute linking");
-        for (int i = 0; i < 5; i++) {
-            Assert.assertTrue(racePage.getRaceAttributeByName(Constants.attributeList.get(i).name).isVisible());
+        for (Attribute attribute : Constants.attributeList) {
+            Assert.assertTrue(racePage.getRaceAttributeByName(attribute.name).isVisible());
         }
+
         logger.info("Opening Character Creation page...");
         raceCreationPage.characerCreationPageLink().click();
         logger.info("Creating Character...");
@@ -106,18 +108,22 @@ public class AddAttributeToRace extends BaseTest {
         logger.info("Opening Character page...");
         characterCreationPage.characterLink().click();
         logger.info("Verifying Attributes present on Character page");
-        for (int i=0;i<5;i++) {
-            Assert.assertTrue(characterPage.getCharacterAttributeByName(Constants.attributeList.get(i).name).isVisible());
+
+        for (Attribute attribute : Constants.attributeList) {
+            Assert.assertTrue(characterPage.getCharacterAttributeByName(attribute.name).isVisible());
         }
-        for (int i=0;i<5;i++) {
-            logger.info("Increasing " + Constants.attributeList.get(i).name + " attribute");
-            logger.info("Current Exp cost " + attributeIncrease(Constants.attributeList.get(i).name,Constants.attributeList.get(i).baseCost));
+
+        int totalAttributesExpCost = 0;
+        for (Attribute attribute : Constants.attributeList) {
+            logger.info("Increasing " + attribute.name + " attribute");
+            logger.info("Current Exp cost " + attributeIncrease(attribute.name, attribute.baseCost));
+            totalAttributesExpCost = totalAttributesExpCost + attributeIncrease(attribute.name, attribute.baseCost);
         }
-            logger.info("Returning to Character Creation page...");
-            raceCreationPage.characerCreationPageLink().click();
-            expRemaining = Integer.parseInt(Constants.CHARACTER_EXP) - expCost;
-            logger.info(expRemaining + "Exp Remaining");
-            Assert.assertEquals("Exp doesn`t match", expRemaining.toString(), characterCreationPage.expLabel().getText());
+        logger.info("Returning to Character Creation page...");
+        raceCreationPage.characerCreationPageLink().click();
+        Integer expRemaining = Integer.parseInt(Constants.CHARACTER_EXP) - totalAttributesExpCost;
+        logger.info(expRemaining + "Exp Remaining");
+        Assert.assertEquals("Exp doesn`t match", expRemaining.toString(), characterCreationPage.expLabel().getText());
 
     }
 
@@ -126,4 +132,4 @@ public class AddAttributeToRace extends BaseTest {
         driver.close();
         driver.quit();
     }
-    }
+}

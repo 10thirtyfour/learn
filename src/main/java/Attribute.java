@@ -5,7 +5,7 @@ public class Attribute {
     String name;
     String baseCost;
 
-    Attribute (String name,String baseCost){
+    Attribute(String name, String baseCost) {
         this.name = name;
         this.baseCost = baseCost;
 
