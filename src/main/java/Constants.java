@@ -13,9 +13,14 @@ public final class Constants {
     public static final String ATTRIBUTE_NAME4 = "TestAttribute4";
     public static final String ATTRIBUTE_NAME5 = "TestAttribute5";
     public static final String ATTRIBUTE_COST1 = "1";
+    public static final String ATTRIBUTE_COST2 = "2";
+    public static final String ATTRIBUTE_COST3 = "3";
+    public static final String ATTRIBUTE_COST4 = "4";
+    public static final String ATTRIBUTE_COST5 = "5";
     public static final String RACE_NAME = "TestRace";
     public static final String CHARACTER_AGE = "50";
     public static final String CHARACTER_EXP = "200";
+    public static final ArrayList<Attribute> attributeList = new ArrayList<Attribute>();
 
 
 
